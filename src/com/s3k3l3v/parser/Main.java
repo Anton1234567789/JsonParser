@@ -25,7 +25,7 @@ public class Main {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             con = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@192.168.10.56:1521:ora112", "gastello", "gjkysqgbpltw");
+                    "jdbc:oracle:thin:@192.168.10.56:1521:ora112", "gastello", "***");
             System.out.println("Connection Established"+ con);
             String qry = "SELECT s.NN id,\n" +
                     "       s.NAME title,\n" +
