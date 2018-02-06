@@ -1,23 +1,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.s3k3l3v.parser</groupId>
+    <group_id>com.s3k3l3v.parser</group_id>
     <artifactId>JsonParser</artifactId>
     <version>0.1-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
-            <groupId>net.minidev</groupId>
+            <group_id>net.minidev</group_id>
             <artifactId>json-smart</artifactId>
             <version>2.2.1</version>
         </dependency>
 
         <dependency>
-            <groupId>org.skyscreamer</groupId>
+            <group_id>org.skyscreamer</group_id>
             <artifactId>jsonassert</artifactId>
             <version>1.4.0</version>
         </dependency>
         <dependency>
-            <groupId>org.codehaus.jackson</groupId>
+            <group_id>org.codehaus.jackson</group_id>
             <artifactId>jackson-core-asl</artifactId>
             <version>1.9.13</version>
         </dependency>

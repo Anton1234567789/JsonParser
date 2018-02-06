@@ -10,11 +10,23 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
+    private static final String qry = "SELECT s.NN id,\n" +
+            "       s.NAME title,\n" +
+            "       s.NN article,\n" +
+            "       s.CODGGR brend,\n" +
+            "       975 group_id  \n" +
+            "  FROM GASTELLO.CAT_SKLALL s\n" +
+            "  WHERE s.AT_SITE = 1\n" +
+            "    AND s.TYPE_ID IS NOT NULL\n" +
+            "  AND s.NN > 0\n" +
+            "  ORDER BY 4, 2\n";
 
     public static void main(String[] args) {
-        createJSONFile("table");
+        createJSONFile("products");
     }
 
     public static void createJSONFile(String namedJSONFile){
@@ -25,36 +37,55 @@ public class Main {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             con = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@192.168.10.56:1521:ora112", "gastello", "***");
-            System.out.println("Connection Established"+ con);
-            String qry = "SELECT s.NN id,\n" +
-                    "       s.NAME title,\n" +
-                    "       s.NN article,\n" +
-                    "       s.NN group_id, \n" +
-                    "       s.DESCR description \n" +
-                    "  FROM GASTELLO.CAT_SKLALL s\n" +
-                    "  WHERE s.AT_SITE = 1\n" +
-                    "    AND s.TYPE_ID IS NOT NULL";
+                    "jdbc:oracle:thin:@192.168.10.56:1521:ora112", "gastello", "gjkysqgbpltw");
+            System.out.println("Connection Established "+ con);
+
             st = con.createStatement();
             rs = st.executeQuery(qry);
 
             JSONObject jObj = new JSONObject();
 
-            ArrayList<Table> list = new ArrayList<Table>();
-            Table sPojo = null;
-            while (rs.next()) {
-                sPojo=new Table();
+            ArrayList<Products> list = new ArrayList<Products>();
+//            ArrayList<TableCategories> list = new ArrayList<TableCategories>();
+            Products products = null;
+            TableCategories tableCategories = null;
 
-                sPojo.setId(rs.getString("id"));
-                sPojo.setTitle(rs.getString("title"));
-                sPojo.setArticle(rs.getString("article"));
-                sPojo.setGroupId(rs.getString("group_id"));
-                sPojo.setDescription(rs.getString("description"));
-                list.add(sPojo);
+//            ArrayList<ProductId> list = new ArrayList<ProductId>();
+//            ProductId productId = null;
 
+            Ueba ueba = null;
+//            List<Ueba> list = new ArrayList<Ueba>();
+            Map<String, Integer> map = new HashMap<String, Integer>();
+
+//            TabSiteProperties tabSiteProperties = null;
+//            List<TabSiteProperties> list = new ArrayList<TabSiteProperties>();
+
+//            TabSitePossibleProp tabSitePossibleProp = null;
+//            List<TabSitePossibleProp> list = new ArrayList<TabSitePossibleProp>();
+
+            Ueba2 ueba2 = null;
+//            List<Ueba2> list = new ArrayList<Ueba2>();
+
+            Shops shops = null;
+//            List<Shops> list = new ArrayList<Shops>();
+
+            ShopsRest shopsRest = null;
+//            List<ShopsRest> list = new ArrayList<ShopsRest>();
+
+            while (rs.next()){
+                products = new Products();
+
+                products.setId(rs.getInt("id"));
+                products.setTitle(rs.getString("title"));
+                products.setArticle(rs.getInt("article"));
+                products.setBrend(rs.getInt("brend"));
+                products.setGroup_id(rs.getInt("group_id"));
+
+               list.add(products);
             }
 
-            jObj.put("tabledetails",list);
+            jObj.put("products", list);
+
             try{
                 FileWriter file = new FileWriter(namedJSONFile+".json");
                 file.write(jObj.toJSONString());
